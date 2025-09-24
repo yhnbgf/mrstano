@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Belated Teachers' Day, Mrs Tano!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Comic Sans MS", "Segoe Script", cursive;
+      background: #fdf6f0;
+      color: #333;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+    
+    /* Landing Page */
+    .page {
+      display: none;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    .page.active {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in;
+    }
+    
+    .landing h1 {
+      font-size: 2.8em;
+      color: #ff6f91;
+      margin-bottom: 20px;
+      animation: bounceIn 1.2s ease-out;
+    }
+    
+    .landing p {
+      font-size: 1.2em;
+      line-height: 1.6em;
+      max-width: 600px;
+      margin-bottom: 30px;
+      animation: slideUp 1s ease-out 0.3s both;
+    }
+    
+    .landing img {
+      max-width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      margin: 20px 0;
+      animation: zoomIn 1s ease-out 0.6s both;
+      transition: transform 0.3s ease;
+    }
+    
+    .landing img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    
+    .buttons {
+      margin-top: 30px;
+      animation: slideUp 1s ease-out 0.9s both;
+    }
+    
+    .buttons button {
+      margin: 10px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 25px;
+      background: #ffb347;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .buttons button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .buttons button:hover::before {
+      left: 100%;
+    }
+    
+    .buttons button:hover {
+      background: #ff6f91;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(255, 111, 145, 0.3);
+    }
+    
+    /* Memory Pages */
+    .memory-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .memory-container {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      animation: slideInFromRight 0.8s ease-out;
+    }
+    
+    .memory-container.slide-left {
+      animation: slideInFromLeft 0.8s ease-out;
+    }
+    
+    .string {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 3px;
+      background: #aaa;
+      border-radius: 2px;
+    }
+    
+    .string::before, .string::after {
+      content: "✦";
+      position: absolute;
+      top: -15px;
+      font-size: 1.8em;
+      color: #ff6f91;
+      animation: twinkle 2s ease-in-out infinite alternate;
+    }
+    
+    .string::before { left: -10px; }
+    .string::after { right: -10px; }
+    
+    .memory-image {
+  width: 80%;              /* smaller than before */
+  max-width: 700px;        /* reduced from 850px */
+  height: auto;
+  max-height: 60vh;        /* shorter for balance */
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+  margin: 40px auto 25px;
+  display: block;
+  transition: all 0.3s ease;
+  animation: imageFloat 3s ease-in-out infinite;
+}
+
+/* Final message image — same size but special effect */
+.final-message .memory-image {
+  /* same size as regular */
+  width: 80%;
+  max-width: 700px;
+  max-height: 60vh;
+
+  /* nicer effects */
+  border: 3px solid rgba(255, 192, 203, 0.7); /* soft border */
+  box-shadow: 0 15px 45px rgba(255, 182, 193, 0.6); /* warmer glow */
+  animation: imageFloat 3s ease-in-out infinite, finalGlow 6s ease-in-out infinite;
+}
+
+/* Glow pulse just for the final one */
+@keyframes finalGlow {
+  0%   { box-shadow: 0 15px 45px rgba(255, 182, 193, 0.6); }
+  50%  { box-shadow: 0 20px 60px rgba(255, 105, 180, 0.9); }
+  100% { box-shadow: 0 15px 45px rgba(255, 182, 193, 0.6); }
+}
+
+
+    .memory-image:hover {
+      transform: scale(1.02) rotate(1deg);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+    
+    .memory-text {
+      font-size: 1.3em;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 25px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: textSlideUp 0.8s ease-out 0.3s both;
+    }
+    
+    /* Navigation */
+    .nav-controls {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 100;
+    }
+    
+    .nav-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #ff6f91;
+      color: white;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 111, 145, 0.3);
+    }
+    
+    .nav-btn:hover {
+      background: #ff5577;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 111, 145, 0.4);
+    }
+    
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .page-counter {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: #ff6f91;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .home-btn {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #ffb347;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .download-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff9a9e, #fecfef);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 111, 145, 0.4);
+  margin-left: 10px;
+}
+
+.download-btn:hover {
+  background: linear-gradient(135deg, #ff6f91, #ffb347);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 111, 145, 0.5);
+}
+
+    .home-btn:hover {
+      background: #ff6f91;
+      transform: translateY(-2px);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes bounceIn {
+      0% { transform: translateY(-100px); opacity: 0; }
+      50% { transform: translateY(20px); opacity: 1; }
+      100% { transform: translateY(0); }
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes zoomIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes slideInFromRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideInFromLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes textSlideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes twinkle {
+      from { opacity: 0.5; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+    
+    @keyframes imageFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* Videos placeholder */
+    .videos-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    
+    .videos-page h2 {
+      font-size: 2.5em;
+      color: #ff6f91;
+      animation: bounceIn 1s ease-out;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .landing h1 { font-size: 2.2em; }
+      .landing img { max-width: 280px; }
+      .memory-image { height: 300px; }
+      .memory-text { font-size: 1.1em; }
+      .nav-controls { bottom: 20px; }
+      .page-counter, .home-btn { top: 20px; }
+    }
+  </style>
+</head>
+<body>
+    <audio id="bg-music" autoplay loop muted>
+        <source src="song.mp3" type="audio/mpeg">
+      </audio>
+      
+      <script>
+        // unmute when the user clicks anywhere
+        document.addEventListener("click", () => {
+          const music = document.getElementById("bg-music");
+          music.muted = false;
+          music.play();
+        }, { once: true });
+      </script>
+      
+  
+
+  <!-- Landing Page -->
+  <div class="page active" id="landing">
+    <div class="landing">
+      <h1>Happy Belated Teachers' Day, Mrs Tano!</h1>
+      <p>Hi Mrs Tano, we realised that we didn't really send you all our pictures, and this is a nice time to show them! (˶ᵔ ᵕ ᵔ˶)</p>
+      <img src="image1.jpg" alt="Mrs Tano">
+      <div class="buttons">
+        <button onclick="showMemories()">📸 Memories</button>
+        <button onclick="showVideos()">🎥 Videos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Memory Page 1 -->
+  <div class="page" id="memory1">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">1 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image4.jpg" alt="Chemistry class moment" class="memory-image">
+        <div class="memory-text">
+          Thank you for being such a knowledgeable, thoughtful and patient chemistry teacher. You put up with our most ridiculous questions and would always answer them with tact without hurting our feelings. 🫶🏻🥹❤️‍🩹
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()" disabled>← Previous</button>
+      <button class="nav-btn" onclick="nextMemory()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Memory Page 2 -->
+  <div class="page" id="memory2">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">2 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image2.jpg" alt="Form teacher moment" class="memory-image">
+        <div class="memory-text">
+          Thank you for playing the role as our form teacher so incredibly well. We will always remember the 1 to 1 talks and your care for us especially during the peak exam season. (づ ᴗ _ᴗ)づ♡
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+      <button class="nav-btn" onclick="nextMemory()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Memory Page 3 -->
+  <div class="page" id="memory3">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">3 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image5.jpg" alt="Caring teacher moment" class="memory-image">
+        <div class="memory-text">
+          Just like Gardens by the Bay, you truly shine like a flower in our lives. You were forever omnipresent when we needed support. 🌸✨
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+      <button class="nav-btn" onclick="nextMemory()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Memory Page 4 -->
+  <div class="page" id="memory4">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">4 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image3.jpg" alt="Life lesson moment" class="memory-image">
+        <div class="memory-text">
+          You were our mummy bear! Educating us not just in chemistry, but about life and morality as well. The lessons you imparted will truly be long lasting. 🤗
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+      <button class="nav-btn" onclick="nextMemory()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Memory Page 5 -->
+  <div class="page" id="memory5">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">5 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image7.jpg" alt="Class activity" class="memory-image">
+        <div class="memory-text">
+            Thank you for your great initiatives, for allowing us to eat outside as a class, and writing messages to each other just before prelims. ⸜(｡˃ ᵕ ˂)⸝♡
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+      <button class="nav-btn" onclick="nextMemory()">Next →</button>
+    </div>
+  </div>
+
+  <!-- Memory Page 6 -->
+  <div class="page" id="memory6">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">6 / 6</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image6.jpg" alt="Strong teacher moment" class="memory-image">
+        <div class="memory-text">
+          Thank you for always showing your toughest self, despite your inner struggles. Without you, we will definitely be struggling with A levels. We will remember you for always putting us first, always asking us how our exams are going and secretly checking up on us. ⋆.˚✮𝕋𝕙𝕒𝕟𝕜 𝕪𝕠𝕦✮˚.⋆ 💖💗🥰💞
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+      <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+      <button class="nav-btn" onclick="showFinalMessage()">Final Message →</button>
+    </div>
+  </div>
+
+  <!-- Final Message -->
+  <div class="page" id="final">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="page-counter">Final</div>
+    <div class="memory-page">
+      <div class="memory-container">
+        <div class="string"></div>
+        <img src="image10.jpg" alt="Final memory" class="memory-image final-message">
+        <div class="memory-text" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); color: white; font-size: 1.4em;">
+          Thank you Mrs Tano for being the beacon of light in our formative years, you are truly unforgettable and we will cherish these memories with you. ♡<3💕
+        </div>
+      </div>
+    </div>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousMemory()">← Previous</button>
+        <button class="nav-btn" onclick="showLanding()">🏠 Home</button>
+        <a href="https://drive.google.com/drive/folders/1Hg5pJ39fGk10AuXaIfK61qYigp4zhCKl?usp=sharing" target="_blank">
+          <button class="download-btn">⬇️ Download Memories</button>
+        </a>
+      </div>
+      
+
+  <!-- Videos Page -->
+  <div class="page" id="videos">
+    <button class="home-btn" onclick="showLanding()">🏠 Home</button>
+    <div class="videos-page">
+      <h2>Videos coming soon… 🎥</h2>
+    </div>
+  </div>
+
+  <script>
+    let currentMemory = 1;
+    const totalMemories = 6;
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    function showLanding() {
+      showPage('landing');
+      currentMemory = 1;
+    }
+
+    function showMemories() {
+      currentMemory = 1;
+      showPage('memory1');
+    }
+
+    function showVideos() {
+      showPage('videos');
+    }
+
+    function nextMemory() {
+      if (currentMemory < totalMemories) {
+        currentMemory++;
+        const container = document.querySelector(`#memory${currentMemory} .memory-container`);
+        container.classList.remove('slide-left');
+        container.classList.add('slide-right');
+        showPage(`memory${currentMemory}`);
+      }
+    }
+
+    function previousMemory() {
+      if (currentMemory > 1) {
+        currentMemory--;
+        const container = document.querySelector(`#memory${currentMemory} .memory-container`);
+        container.classList.remove('slide-right');
+        container.classList.add('slide-left');
+        showPage(`memory${currentMemory}`);
+      }
+    }
+
+    function showFinalMessage() {
+      showPage('final');
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') nextMemory();
+      if (e.key === 'ArrowLeft') previousMemory();
+      if (e.key === 'Home') showLanding();
+    });
+
+    // Add floating hearts animation
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.style.position = 'fixed';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.style.fontSize = '20px';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '1000';
+      heart.style.animation = 'floatUp 8s linear forwards';
+      
+      document.body.appendChild(heart);
+      
+      setTimeout(() => {
+        document.body.removeChild(heart);
+      }, 8000);
+    }
+
+    // Add CSS for floating hearts
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Create floating hearts periodically
+    setInterval(createFloatingHeart, 3000);
+  </script>
+</body>
+</html>
