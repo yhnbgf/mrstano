@@ -599,17 +599,25 @@
     <button class="home-btn" onclick="showLanding()">🏠 Home</button>
     <div class="videos-page">
       <h2>With Love, 24S65 ❤️</h2>
-      <video controls preload="metadata">
-        <source src="mrstano.mov" type="video/quicktime">
-        <source src="mrstano.mov" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <iframe src="https://drive.google.com/file/d/1zF6ePMWscLDUKhZfz6Qdz7wLo4CUYq7R/preview" 
+              style="max-width: 80%; max-height: 60vh; width: 800px; height: 450px; border-radius: 20px; box-shadow: 0 12px 35px rgba(0,0,0,0.2); animation: zoomIn 1s ease-out 0.3s both;" 
+              allow="autoplay" 
+              allowfullscreen>
+      </iframe>
+      
+      <div style="margin-top: 30px;">
+        <a href="https://drive.google.com/drive/u/0/folders/1Hg5pJ39fGk10AuXaIfK61qYigp4zhCKl" target="_blank">
+          <button class="download-btn">⬇️ Download Video</button>
+        </a>
+      </div>
+      
       <div class="volume-control">
         <span>🎵 Background Music</span>
         <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
         <span id="volumeValue">50%</span>
       </div>
     </div>
+    
   </div>
 
   <script>
